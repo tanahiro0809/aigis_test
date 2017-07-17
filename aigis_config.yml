@@ -14,7 +14,7 @@ dependencies:
 
 # The directory containing the tempalte files to generate pages
 # It must contain 'layout.xxx' and 'index.xxx' (.ejs or .jade or .hbs)
-template_dir: ./src/http/aigis_assets/template_ejs
+template_dir: ./src/http/_styleguide/aigis_assets/template_ejs
 template_engine: ejs
 
 log: true
