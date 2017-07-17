@@ -1,21 +1,33 @@
+const browserVersion = [
+  'Android >= 4.4',
+  'Chrome >= 57',
+  'ChromeAndroid >= 57',
+  'Edge >= 14',
+  'Firefox >= 52',
+  'ie 11',
+  'iOS >= 9',
+  'Safari >= 9'
+];
+
+const port = {};
+port.http = 33556;
+port.https = 43556;
+
+// 以降は触らない
+
 const SRC_DIR = `src`;
 const DIST_DIR = `dist`;
 
-const port = 33302;
-
 const autoprefixer = require(`gulp-autoprefixer`);
-const browser = require(`browser-sync`);
+const connectSSI = require(`connect-ssi`);
 const gulp = require(`gulp`);
 const htmlhint = require(`gulp-htmlhint`);
 const notify = require(`gulp-notify`);
 const plumber = require(`gulp-plumber`);
-const rename = require(`gulp-rename`);
 const sass = require(`gulp-sass`);
 const header = require(`gulp-header`);
-const cmq = require(`gulp-combine-media-queries`);
-const ssi = require(`connect-ssi`);
+const webserver = require(`gulp-webserver`);
 const fs = require(`fs`);
-const aigis = require(`gulp-aigis`);
 
 //sass
 gulp.task(`sass`, function() {
@@ -24,55 +36,49 @@ gulp.task(`sass`, function() {
     errorHandler: notify.onError(`sassにエラーがあります`)
   }))
   .pipe(sass({
-    outputStyle: `expanded`
+    outputStyle: `compact`
   }))
   .pipe(autoprefixer({
-    // ☆IEは9以上、Androidは4以上、iOS Safariは8以上
-    // その他は最新2バージョンで必要なベンダープレフィックスを付与する設定
-    browsers: [`last 2 versions`, `ie >= 9`, `Android >= 4`,`ios_saf >= 8`],
+    browsers: browserVersion,
     cascade: false
-  }))
-  .pipe(cmq({
-    log: true
   }))
   .pipe(header('@charset "UTF-8";\n\n'))
   .pipe(gulp.dest(`./${DIST_DIR}`))
-  .pipe(notify(`Sassをコンパイルしました`))
-  .pipe(browser.reload({
-    stream: true
-  }));
+  .pipe(notify(`Sassをコンパイルしました`));
 });
 
 //html-hint
 gulp.task(`html-hint`, function() {
-  gulp.src([`${DIST_DIR}/**/*.html`, `!${DIST_DIR}/**/ssi/**/*.html`, `!${DIST_DIR}/**/_styleguide/**/*.html`])
+  gulp.src([`${DIST_DIR}/**/*.html`, `!${DIST_DIR}/**/ssi/**/*.html`])
   .pipe(htmlhint())
-  .pipe(htmlhint.reporter())
-  .pipe(browser.reload({
-    stream: true
-  }));
+  .pipe(htmlhint.reporter());
 });
 
-//browser-sync
+// server
 gulp.task(`server`, function() {
-  browser({
-    port: port,
-    server: {
-      baseDir: `./${DIST_DIR}/http/`,
+  gulp.src(`${DIST_DIR}/http`)
+    .pipe(webserver({
+      host: `localhost`,
+      port: port.http,
       middleware: [
-        ssi({
-          baseDir: __dirname + `/${DIST_DIR}/http/`,
+        connectSSI({
+          baseDir: `${DIST_DIR}/http`,
           ext: `.html`
         })
       ]
-    }
-  });
-});
+    }));
 
-//aigis
-gulp.task('aigis', function() {
-  return gulp.src('./aigis_config.yml')
-    .pipe(aigis());
+  gulp.src(`${DIST_DIR}/https`)
+    .pipe(webserver({
+      host: `localhost`,
+      port: port.https,
+      middleware: [
+        connectSSI({
+          baseDir: `${DIST_DIR}/https`,
+          ext: `.html`
+        })
+      ]
+    }));
 });
 
 // watch
@@ -81,5 +87,6 @@ gulp.task(`watch`, function(){
   gulp.watch(`${DIST_DIR}/**/*.html`, [`html-hint`]);
 });
 
+
 // default
-gulp.task(`default`,[`watch`, `server`,  `sass`]);
+gulp.task(`default`,[`watch`, `server`]);
