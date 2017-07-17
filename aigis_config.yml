@@ -1,7 +1,8 @@
 # The directory containing the source files to parse recursively
 source:
   - ./src/http/aigis_assets
-  - ./src/http/shared/css
+
+source_type: .md
 
 # The directory that aigis will build to
 dest: ./dist/http/_styleguide

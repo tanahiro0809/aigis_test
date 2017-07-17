@@ -205,6 +205,10 @@
     background-color: #b88ed3;
     color: #fff;
 }
+.aigis-tags__item--ID-A{
+  background-color: pink;
+  color: #fff;
+}
 .aigis-tags.aigis-tagList {
     padding-left: 10px;
 }
