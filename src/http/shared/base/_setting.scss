@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+//common setting (ver 2.0)
+//==================================================
+
+//[spのstyleから記述]
+
+//----------------------------------
+// 変数・mixin設定
+//----------------------------------
+
+//サイト全体で使うカラーコード
+$colorDefault: #333 !default; //デフォルトのテキストカラー
+
+//サイト全体で使うfont-family
+$fontUdShingo: "A-OTF 新ゴ Pro",A-OTF Shin Go Pro,"ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !default;
+$fontHiraginoGothic: "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !default;
+$fontYuGothic: "Lucida Grande","游ゴシック Medium","游ゴシック体","Yu Gothic Medium",YuGothic,"ヒラギノ角ゴ ProN","Hiragino Kaku Gothic ProN","メイリオ",Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif !default;
+
+//サイト全体で使うfont-size
+@mixin baseFontSize {
+  @media all and (max-width: 767px) {
+    font-size: 14px;
+    font-size: 1.4rem;
+  }
+  @media all and (min-width: 768px) {
+    font-size: 16px;
+    font-size: 1.6rem;
+  }
+}
+
+//css reset
+//------------------------------------------------
+body, div, p,
+h1, h2, h3, h4, h5, h6,
+dl, dt, dd, ul, ol, li,
+table, caption,th, td,
+form, fieldset, input, textarea, select,
+pre, address, blockquote,
+embed, object,
+address, dfn,
+article, aside, canvas, figure, figcaption,
+footer, header, menu, nav, section, main,
+audio, video{margin:0px;padding:0px;}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {display: block;}
+audio,
+canvas,
+progress,
+video { display: inline-block;}
+
+//base setting
+//------------------------------------------------
+html {
+  overflow-y: scroll;
+  font-size: 62.5%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  *{
+    //-webkit-font-smoothing: antialiased;
+    //-moz-osx-font-smoothing: grayscale;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color:$colorDefault;
+  font-family: $fontHiraginoGothic;
+  @include baseFontSize;
+  line-height: 1;
+  font-weight: 500;
+}
+
+em {font-style:normal;font-weight:bold;}
+strong {font-style:normal;font-weight:bold;}
+
+ul, ol {list-style:none;}
+
+table {
+  border-collapse:separate;
+  border-spacing:0;
+}
+
+caption, th {
+  text-align: left;
+}
+
+img {border:0; vertical-align:middle; -ms-interpolation-mode:bicubic;}
+
+a {cursor:pointer;text-decoration:underline;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+
+form {font-weight: normal;}
+
+input, button, textarea, select {
+  font-family: $fontHiraginoGothic;
+  line-height: inherit;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  text-transform: none;
+  font-weight: 300;
+}
+select::-ms-expand {
+  display: none;
+}
+
+input[type="submit"],
+input[type="button"],
+button {
+  appearance: button;
+  cursor: pointer;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+:placeholder-shown {
+    color: #999; }
+
+::-webkit-input-placeholder {
+    color: #999;
+}
+:-moz-placeholder {
+    color: #999; opacity: 1;
+}
+:-ms-input-placeholder {
+    color: #999;
+}
+input[type="submit"]::-webkit-search-decoration,
+input[type="button"]::-webkit-search-decoration {
+  display: none;
+}

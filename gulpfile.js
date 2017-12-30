@@ -28,6 +28,13 @@ const sass = require(`gulp-sass`);
 const header = require(`gulp-header`);
 const webserver = require(`gulp-webserver`);
 const fs = require(`fs`);
+const aigis = require('gulp-aigis');
+
+//aigis
+gulp.task(`aigis`, function() {
+  return gulp.src('./aigis_config.yml')
+    .pipe(aigis());
+});
 
 //sass
 gulp.task(`sass`, function() {

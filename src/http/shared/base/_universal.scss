@@ -1,0 +1,369 @@
+@charset "UTF-8";
+
+// universal class (ver 2.0)
+//==================================================
+
+//[spのstyleから記述]
+
+//----------------------------------
+// boolean値設定
+//----------------------------------
+
+$font-size: false !default;
+$font-weight: false !default;
+$clear-fix: false !default;
+$text-align: false !default;
+$vertical-align: false !default;
+$display: true !default;
+$view: false !default;
+$float-img: false !default;
+$button: false !default;
+$margin: false !default;
+$padding: false !default;
+$width: false !default;
+$split: false !default;
+
+// font-size
+//------------------------------------------------
+@if $font-size{
+  @media all and (max-width: 768px) {
+    .u-ft-xs {font-size:10px !important; font-size:1rem !important;}
+    .u-ft-s {font-size:12px !important; font-size:1.2rem !important;}
+    .u-ft-m {font-size:14px !important; font-size:1.4rem !important;}
+    .u-ft-l {font-size:16px !important; font-size:1.6rem !important;}
+    .u-ft-xl {font-size:18px !important; font-size:1.8rem !important;}
+    .u-ft-xxl {font-size:20px !important; font-size:2rem !important;}
+  }
+  @media all and (min-width: 767px) {
+    .u-ft-xs {font-size:12px !important; font-size:1.2rem !important;}
+    .u-ft-s {font-size:14px !important; font-size:1.4rem !important;}
+    .u-ft-m {font-size:16px !important; font-size:1.6rem !important;}
+    .u-ft-l {font-size:18px !important; font-size:1.8rem !important;}
+    .u-ft-xl {font-size:20px !important; font-size:2rem !important;}
+    .u-ft-xxl {font-size:22px !important; font-size:2.2rem !important;}
+  }
+}
+
+// font-weight
+//------------------------------------------------
+@if $font-weight{
+  .u-txt-b{ font-style: bold !important;}
+  .u-txt-n{ font-style: normal !important;}
+}
+
+// clear-fix
+//------------------------------------------------
+@if $clear-fix{
+  .clearfix:after{
+    display: block;
+    content: '';
+    clear: both;
+  }
+}
+
+// text-align
+//------------------------------------------------
+@if $text-align{
+  .u-ta-l{text-align: left !important;}
+  .u-ta-c{text-align: center !important;}
+  .u-ta-r{text-align: right !important;}
+  @media all and (max-width: 768px) {
+    .u-ta-lc{text-align: left !important;}
+    .u-ta-lr{text-align: left !important;}
+    .u-ta-cl{text-align: center !important;}
+    .u-ta-cr{text-align: center !important;}
+    .u-ta-rl{text-align: right !important;}
+    .u-ta-rc{text-align: right !important;}
+  }
+  @media all and (min-width: 767px) {
+    .u-ta-lc{text-align: center !important;}
+    .u-ta-lr{text-align: right !important;}
+    .u-ta-cl{text-align: left !important;}
+    .u-ta-cr{text-align: right !important;}
+    .u-ta-rl{text-align: left !important;}
+    .u-ta-rc{text-align: center !important;}
+  }
+}
+
+// vertical-align
+//------------------------------------------------
+@if $vertical-align{
+  .u-va-t {vertical-align:top !important;}
+  .u-va-m {vertical-align:middle !important;}
+  .u-va-b {vertical-align:bottom !important;}
+}
+
+// display
+//------------------------------------------------
+@if $display{
+  @media all and (max-width: 767px) {
+    .u-pc-disp-i{display: none !important;}
+    .u-pc-disp-ib{display: none !important;}
+    .u-pc-disp-b{display: none !important;}
+    .u-pc-disp-t{display: none !important;}
+    .u-pc-disp-tc{display: none !important;}
+    .u-sp-disp-i{display: inline !important;}
+    .u-sp-disp-ib{display: inline-block !important;}
+    .u-sp-disp-b{display: block !important;}
+    .u-sp-disp-t{display: table !important;}
+    .u-sp-disp-tc{display: table-cell !important;}
+  }
+  @media all and (min-width: 768px) {
+    .u-sp-disp-i{display: none !important;}
+    .u-sp-disp-ib{display: none !important;}
+    .u-sp-disp-b{display: none !important;}
+    .u-sp-disp-t{display: none !important;}
+    .u-sp-disp-tc{display: none !important;}
+    .u-pc-disp-i{display: inline !important;}
+    .u-pc-disp-ib{display: inline-block !important;}
+    .u-pc-disp-b{display: block !important;}
+    .u-pc-disp-t{display: table !important;}
+    .u-pc-disp-tc{display: table-cell !important;}
+  }
+}
+
+// view
+//------------------------------------------------
+@if $view{
+  .u-pc-view{display: block !important;}
+  .u-sp-view{display: block !important;}
+}
+
+// float-img
+//------------------------------------------------
+@if $float-img{
+  .u-wrap-img{
+    .u-img-l {float:left;  margin:0px 10px 5px 0px;}
+    .u-img-r {float:right; margin:0px 0px 5px 10px;}
+    &:after{
+      display: block;
+      content: '';
+      clear: both;
+    }
+  }
+}
+
+// button
+//------------------------------------------------
+@if $button{
+  @media all and (min-width: 767px) {
+    a{
+      img.u-btn{
+        filter:alpha(opacity=100); opacity: 1.0;
+        transition: opacity 0.3s;
+      }
+      &:hover{
+        img.u-btn{
+          filter:alpha(opacity=80); opacity: 0.8;
+        }
+      }
+    }
+    img.u-btn{
+      filter:alpha(opacity=30); opacity: 0.3;
+    }
+    .u-btn-op {transition: opacity 0.3s;}
+    .u-btn-bg {transition: background-color 0.3s;}
+  }
+}
+
+//margin
+//------------------------------------------------
+@mixin u-mg($class,$value) {
+  .u-mgt#{$class} { margin-top: #{$value}px !important; }
+  .u-mgr#{$class} { margin-right: #{$value}px !important; }
+  .u-mgb#{$class} { margin-bottom: #{$value}px !important; }
+  .u-mgl#{$class} { margin-left: #{$value}px !important; }
+}
+@if $margin{
+  .u-mg0{margin: 0 !important;}
+  .u-mg-auto{
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  @media all and (max-width:768px) {
+    @for $value from 0 through 10 { // 0px to 50(10*5)px
+      $value : $value * 5;
+      $class : $value;
+      @if $value < 10 {
+        $class : #{$value};
+      }
+      @include u-mg($class,$value);
+      @for $valueSP from 0 through 10 {
+        $valueSP : $valueSP * 5;
+        $classSP : $valueSP;
+        @if $valueSP < 10 {
+          $classSP : #{$valueSP};
+        }
+        @if $valueSP != $value {
+          $classPCSP : #{$class + "-" + $classSP};
+          @include u-mg($classPCSP,$value);
+        }
+      }
+    }
+  }
+  @media all and (min-width:767px) {
+    @for $value from 0 through 10 { // 0px to 50(10*5)px
+      $value : $value * 5;
+      $class : $value;
+      @if $value < 10 {
+        $class : 0#{$value};
+      }
+      @include u-mg($class,$value);
+      @for $valueSP from 0 through 10 {
+        $valueSP : $valueSP * 5;
+        $classSP : $valueSP;
+        @if $valueSP < 10 {
+          $classSP : #{$valueSP};
+        }
+        @if $valueSP != $value {
+          $classPCSP : #{$class + "-" + $classSP};
+          @include u-mg($classPCSP,$valueSP);
+        }
+      }
+    }
+  }
+}
+
+//padding
+//------------------------------------------------
+@mixin u-pd($class,$value) {
+  .u-pdt#{$class} { padding-top: #{$value}px !important; }
+  .u-pdr#{$class} { padding-right: #{$value}px !important; }
+  .u-pdb#{$class} { padding-bottom: #{$value}px !important; }
+  .u-pdl#{$class} { padding-left: #{$value}px !important; }
+}
+@if $padding{
+  .u-pd0{padding: 0 !important;}
+  @media all and (max-width:768px) {
+    @for $value from 0 through 10 {
+      $value : $value * 5;
+      $class : $value;
+      @if $value < 10 {
+        $class : #{$value};
+      }
+      @include u-pd($class,$value);
+      @for $valueSP from 0 through 10 {
+        $valueSP : $valueSP * 5;
+        $classSP : $valueSP;
+        @if $valueSP < 10 {
+          $classSP : #{$valueSP};
+        }
+        @if $valueSP != $value {
+          $classPCSP : #{$class + "-" + $classSP};
+          @include u-pd($classPCSP,$value);
+        }
+      }
+    }
+  }
+  @media all and (min-width:767px) {
+    @for $value from 0 through 10 {
+      $value : $value * 5;
+      $class : $value;
+      @if $value < 10 {
+        $class : #{$value};
+      }
+      @include u-pd($class,$value);
+      @for $valueSP from 0 through 10 {
+        $valueSP : $valueSP * 5;
+        $classSP : $valueSP;
+        @if $valueSP < 10 {
+          $classSP : #{$valueSP};
+        }
+        @if $valueSP != $value {
+          $classPCSP : #{$class + "-" + $classSP};
+          @include u-pd($classPCSP,$valueSP);
+        }
+      }
+    }
+  }
+}
+
+//width
+//------------------------------------------------
+@if $width{
+  @for $i from 1 through 45 {
+    .u-w#{$i}p {
+      width:#{$i}#{'%'} !important;
+    }
+  }
+  @for $i from 10 through 20 {
+    .u-w#{$i * 5}p {
+      margin:#{$i * 5}#{'%'} !important;
+    }
+  }
+}
+
+//split
+//------------------------------------------------
+@if $split{
+  @for $i from 2 through 5 {
+    $split: percentage(1 / $i);
+    .u-split#{$i} {
+      width: $split !important;
+    }
+  }
+  @media all and (max-width:768px) {
+    .u-split-sp1pc2,
+    .u-split-sp1pc3,
+    .u-split-sp1pc4,
+    .u-split-sp1pc5 {
+      width: auto !important;
+    }
+    .u-split-sp2pc1,
+    .u-split-sp2pc3,
+    .u-split-sp2pc4,
+    .u-split-sp2pc5 {
+      width: 50% !important;
+    }
+    .u-split-sp3pc1,
+    .u-split-sp3pc2,
+    .u-split-sp3pc4,
+    .u-split-sp3pc5{
+      width: 33.33333% !important;
+    }
+    .u-split-sp4pc1,
+    .u-split-sp4pc2,
+    .u-split-sp4pc3,
+    .u-split-sp4pc5{
+      width: 25% !important;
+    }
+    .u-split-sp5pc1,
+    .u-split-sp5pc2,
+    .u-split-sp5pc3,
+    .u-split-sp5pc4{
+      width: 20% !important;
+    }
+  }
+  @media all and (min-width:767px) {
+    .u-split-sp2pc1,
+    .u-split-sp3pc1,
+    .u-split-sp4pc1,
+    .u-split-sp5pc1 {
+      width: auto !important;
+    }
+    .u-split-sp1pc2,
+    .u-split-sp3pc2,
+    .u-split-sp4pc2,
+    .u-split-sp5pc2 {
+      width: 50% !important;
+    }
+    .u-split-sp1pc3,
+    .u-split-sp2pc3,
+    .u-split-sp4pc3,
+    .u-split-sp5pc3 {
+      width: 33.33333% !important;
+    }
+    .u-split-sp1pc4,
+    .u-split-sp2pc4,
+    .u-split-sp3pc4,
+    .u-split-sp5pc4 {
+      width: 25% !important;
+    }
+    .u-split-sp1pc5,
+    .u-split-sp2pc5,
+    .u-split-sp3pc5,
+    .u-split-sp4pc5 {
+      width: 20% !important;
+    }
+  }
+}
