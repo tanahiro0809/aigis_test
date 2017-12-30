@@ -6,6 +6,6 @@ tag: ID-A
 ---
 
 ```html
-<p class="txt-st">テキストモジュール例てsと</p>
+<p class="txt-st">テキストモジュール例</p>
 ```
 */
